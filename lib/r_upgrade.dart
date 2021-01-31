@@ -62,8 +62,7 @@ class RUpgrade {
   ///
   /// download broadcast
   ///
-  static StreamController<DownloadInfo> _downloadInfo =
-      StreamController.broadcast();
+  static StreamController<DownloadInfo> _downloadInfo = StreamController.broadcast();
 
   /// Android
   ///
@@ -86,13 +85,12 @@ class RUpgrade {
   /// * [isAutoRequestInstall] download completed will install apk.
   /// * [useDownloadManager] if true will use DownloadManager,false will use my service ,
   /// *         if true will no use [pause] , [upgradeWithId] , [getDownloadStatus] , [getLastUpgradedId] methods.
-  /// * [upgradeFlavor] you can use [RUpgradeFlavor.normal] , [RUpgradeFlavor.hotUpgrade] , [RUpgradeFlavor.incrementUpgrade] flavor
+  /// * [upgradeFlavor] you can use [RUpgradeFlavor.normal] , [RUpgradeFlavor.hotUpgrade] flavor
   static Future<int> upgrade(
     String url, {
     Map<String, String> header,
     String fileName,
-    NotificationVisibility notificationVisibility =
-        NotificationVisibility.VISIBILITY_VISIBLE,
+    NotificationVisibility notificationVisibility = NotificationVisibility.VISIBILITY_VISIBLE,
     NotificationStyle notificationStyle = NotificationStyle.planTime,
     bool isAutoRequestInstall = true,
     bool useDownloadManager = false,
@@ -155,8 +153,7 @@ class RUpgrade {
   /// * if not found the id , will return [false].
   static Future<bool> upgradeWithId(
     int id, {
-    NotificationVisibility notificationVisibility =
-        NotificationVisibility.VISIBILITY_VISIBLE,
+    NotificationVisibility notificationVisibility = NotificationVisibility.VISIBILITY_VISIBLE,
     bool isAutoRequestInstall = true,
   }) async {
     assert(Platform.isAndroid, 'This method only support android application');
@@ -233,15 +230,7 @@ class DownloadInfo {
   final double speed;
   final DownloadStatus status;
 
-  DownloadInfo(
-      {this.maxLength,
-      this.path,
-      this.planTime,
-      this.currentLength,
-      this.percent,
-      this.id,
-      this.status,
-      this.speed});
+  DownloadInfo({this.maxLength, this.path, this.planTime, this.currentLength, this.percent, this.id, this.status, this.speed});
 
   factory DownloadInfo.formMap(dynamic map) => DownloadInfo(
         maxLength: map['max_length'],
@@ -314,8 +303,7 @@ class NotificationVisibility {
 
   toString() => 'NotificationVisibility($_value)';
 
-  static NotificationVisibility from(int value) =>
-      NotificationVisibility._internal(value);
+  static NotificationVisibility from(int value) => NotificationVisibility._internal(value);
 
   /// This download is visible but only shows in the notifications
   /// while it's in progress.
@@ -323,8 +311,7 @@ class NotificationVisibility {
 
   /// This download is visible and shows in the notifications while
   /// in progress and after completion.
-  static const VISIBILITY_VISIBLE_NOTIFY_COMPLETED =
-      const NotificationVisibility._internal(1);
+  static const VISIBILITY_VISIBLE_NOTIFY_COMPLETED = const NotificationVisibility._internal(1);
 
   /// This download doesn't show in the UI or in the notifications.
   static const VISIBILITY_HIDDEN = const NotificationVisibility._internal(2);
@@ -332,8 +319,7 @@ class NotificationVisibility {
   ///
   /// This download shows in the notifications after completion ONLY.
   ///
-  static const VISIBILITY_VISIBLE_NOTIFY_ONLY_COMPLETION =
-      const NotificationVisibility._internal(3);
+  static const VISIBILITY_VISIBLE_NOTIFY_ONLY_COMPLETION = const NotificationVisibility._internal(3);
 }
 
 /// Notification show style about content text
@@ -349,7 +335,6 @@ enum NotificationStyle {
 enum RUpgradeFlavor {
   normal,
   hotUpgrade,
-  incrementUpgrade,
 }
 
 ///
@@ -367,8 +352,7 @@ class AndroidStore {
   static const GOOGLE_PLAY = const AndroidStore.internal('com.android.vending');
 
   //应用宝
-  static const TENCENT =
-      const AndroidStore.internal('com.tencent.android.qqdownloader');
+  static const TENCENT = const AndroidStore.internal('com.tencent.android.qqdownloader');
 
   //360手机助手
   static const QIHOO = const AndroidStore.internal('com.qihoo.appstore');

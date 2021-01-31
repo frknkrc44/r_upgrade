@@ -124,8 +124,9 @@ public class UpgradeService extends Service {
         filter.addAction(RECEIVER_RESTART);
         filter.addAction(RECEIVER_PAUSE);
         filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
-        registerReceiver(actionReceiver, filter);
-
+        try {
+            registerReceiver(actionReceiver, filter);
+        } catch(Throwable t) {}
     }
 
     @Override
@@ -159,7 +160,9 @@ public class UpgradeService extends Service {
 
     @Override
     public void onDestroy() {
-        unregisterReceiver(actionReceiver);
+        try {
+            unregisterReceiver(actionReceiver);
+        } catch(Throwable t) {}
         runnable.handlerDownloadPause();
         super.onDestroy();
     }

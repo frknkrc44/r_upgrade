@@ -59,17 +59,7 @@ class GenerateAndInstallAsyncTask extends AsyncTask<Integer, Integer, Uri> {
                 } else {
                     uri = Uri.fromFile(file);
                 }
-                if (upgradeFlavor == UpgradeSQLite.UPGRADE_FLAVOR_INCREMENT) {
-                    String newPath = new IncrementUpgradeManager(contextWrapper.get()).mixinAndGetNewApk(path);
-                    RUpgradeLogger.get().d(TAG,"合成成功，新的安装包路径："+newPath);
-                    if (newPath == null) return null;
-                    file = new File(newPath);
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                        uri = RUpgradeFileProvider.getUriForFile(contextWrapper.get(), contextWrapper.get().getApplicationInfo().packageName + ".fileProvider", file);
-                    } else {
-                        uri = Uri.fromFile(file);
-                    }
-                } else if (upgradeFlavor == UpgradeSQLite.UPGRADE_FLAVOR_HOT_UPDATE) {
+                if (upgradeFlavor == UpgradeSQLite.UPGRADE_FLAVOR_HOT_UPDATE) {
                     boolean isSuccess = new HotUpgradeManager(contextWrapper.get()).hotUpgrade(uri);
                     if (isSuccess) {
                         return Uri.parse("");
